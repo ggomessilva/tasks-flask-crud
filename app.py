@@ -25,6 +25,7 @@ def get_tasks():
               }
     return jsonify(output)
 
+#Obtem uma task pelo ID
 @app.route('/tasks/<int:id>', methods=['GET'])
 def get_task_by_id(id):
     for task in tasks:
@@ -32,7 +33,7 @@ def get_task_by_id(id):
             return jsonify(task.to_dict())
     return jsonify({"message": "Task not found"}), 404
     
-
+#Atualiza uma task pelo ID
 @app.route('/tasks/<int:id>', methods=['PUT'])
 def update_task(id):
     task = None
@@ -50,6 +51,7 @@ def update_task(id):
     task.description = req_data.get("description", task.description)
     return jsonify({"Message": "Task Updated"})
 
+#Deleta uma task pelo ID
 @app.route('/tasks/<int:id>', methods=['DELETE'])
 def delete_task(id):
     for i, task in enumerate(tasks):
